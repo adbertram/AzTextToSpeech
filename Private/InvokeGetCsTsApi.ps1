@@ -19,10 +19,9 @@ function InvokeGetCsTsApi {
 	}
 
 	$params = @{
-		Headers     = $Headers
-		ContentType = 'application/ssml+xml'
-		Method      = 'GET'
-		Uri         = "https://$($script:config.SubscriptionRegion).tts.speech.microsoft.com/cognitiveservices/$Endpoint"
+		Headers = $headers
+		Method  = 'GET'
+		Uri     = "https://$($script:config.SubscriptionRegion).tts.speech.microsoft.com/cognitiveservices/$Endpoint"
 	}
 	Invoke-RestMethod @params
 }
