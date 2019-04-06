@@ -1,0 +1,8 @@
+{
+    "TokenEndpoint": "https://eastus.api.cognitive.microsoft.com/sts/v1.0/issuetoken",
+    "SubscriptionRegion": "eastus",
+    "CognitiveServicesAccount": {
+        "Name": "TestAccount",
+        "ResourceGroupName": "CognitiveServices"
+    }
+}
