@@ -18,6 +18,7 @@ function InvokeGetCsTsApi {
 		'Authorization' = "Bearer $($script:config.Token)"
 	}
 
+	## TODO: If this returns a 401, send to RefreshCsToken and try again
 	$params = @{
 		Headers = $headers
 		Method  = 'GET'

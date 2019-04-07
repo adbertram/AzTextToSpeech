@@ -35,6 +35,7 @@ function InvokeConvertCsTsApi {
 		$headers = $authHeaders
 	}
 
+	## TODO: If this returns a 401, send to RefreshCsToken and try again
 	$params = @{
 		Headers     = $Headers
 		ContentType = 'application/ssml+xml'
