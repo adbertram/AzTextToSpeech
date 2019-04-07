@@ -26,7 +26,7 @@ function New-RecordingPackage {
 
 	$recordings = Get-ChildItem -Path $RecordingFileFolder
 	$recordings.foreach({
-			if ($_.Name -notin $audioFileNames) {
+			if ($_.BaseName -notin $audioFileNames) {
 				throw "The recording [$($_.Name)] is not in the transcript."
 			}
 		})
