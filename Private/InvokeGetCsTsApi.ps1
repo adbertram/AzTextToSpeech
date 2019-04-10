@@ -18,11 +18,19 @@ function InvokeGetCsTsApi {
 		'Authorization' = "Bearer $($script:config.Token)"
 	}
 
-	## TODO: If this returns a 401, send to RefreshCsToken and try again
-	$params = @{
-		Headers = $headers
-		Method  = 'GET'
-		Uri     = "https://$($script:config.SubscriptionRegion).tts.speech.microsoft.com/cognitiveservices/$Endpoint"
+	try {
+		$params = @{
+			Headers = $headers
+			Method  = 'GET'
+			Uri     = "https://$($script:config.SubscriptionRegion).tts.speech.microsoft.com/cognitiveservices/$Endpoint"
+		}
+		Invoke-RestMethod @params
+	} catch {
+		if ($_.Exception.Message -eq 'The remote server returned an error: (401) Unauthorized.') {
+			RefreshCsToken
+			InvokeGetCsTsApi @PSBoundParameters
+		} else {
+			$PSCmdlet.ThrowTerminatingError($_)
+		}
 	}
-	Invoke-RestMethod @params
 }

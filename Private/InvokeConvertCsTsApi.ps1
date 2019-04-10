@@ -17,6 +17,10 @@ function InvokeConvertCsTsApi {
 
 		[Parameter()]
 		[ValidateNotNullOrEmpty()]
+		[uri]$Uri,
+
+		[Parameter()]
+		[ValidateNotNullOrEmpty()]
 		[string]$Endpoint = 'v1'
 	)
 
@@ -35,15 +39,27 @@ function InvokeConvertCsTsApi {
 		$headers = $authHeaders
 	}
 
-	## TODO: If this returns a 401, send to RefreshCsToken and try again
-	$params = @{
-		Headers     = $Headers
-		ContentType = 'application/ssml+xml'
-		Method      = 'POST'
-		Body        = $Body
-		Uri         = "https://$($script:config.SubscriptionRegion).tts.speech.microsoft.com/cognitiveservices/$Endpoint"
-		OutFile     = $OutputFile
+	try {
+		$params = @{
+			Headers     = $Headers
+			ContentType = 'application/ssml+xml'
+			Method      = 'POST'
+			Body        = $Body
+			OutFile     = $OutputFile
+		}
+		if ($PSBoundParameters.ContainsKey('Uri')) {
+			$params.Uri = $Uri
+		} else {
+			$params.Uri = "https://$($script:config.SubscriptionRegion).tts.speech.microsoft.com/cognitiveservices/$Endpoint"
+		}
+		Invoke-RestMethod @params
+	} catch {
+		if ($_.Exception.Message -eq 'The remote server returned an error: (401) Unauthorized.') {
+			RefreshCsToken
+			InvokeGetCsTsApi @PSBoundParameters
+		} else {
+			$PSCmdlet.ThrowTerminatingError($_)
+		}
 	}
-	Invoke-RestMethod @params
 	Get-Item -Path $OutputFile
 }

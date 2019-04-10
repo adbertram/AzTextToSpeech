@@ -1,6 +1,6 @@
 function ConvertTo-Speech {
 	[OutputType('void')]
-	[CmdletBinding()]
+	[CmdletBinding(DefaultParameterSetName = 'StandardVoice')]
 	param
 	(
 		[Parameter(Mandatory)]
@@ -18,10 +18,18 @@ function ConvertTo-Speech {
 			'audio-24khz-48kbitrate-mono-mp3')]
 		[string]$AudioOutput,
 
-		[Parameter()]
+		[Parameter(Mandatory, ParameterSetName = 'StandardVoice')]
 		[ValidateNotNullOrEmpty()]
 		[ValidateSet('ZiraRUS', 'JessaRUS', 'BenjaminRUS', 'Jessa24kRUS', 'Guy24kRUS', 'GuyNeural', 'JessaNeural')]
 		[string]$VoiceAgent,
+
+		[Parameter(Mandatory, ParameterSetName = 'CustomVoice')]
+		[ValidateNotNullOrEmpty()]
+		[string]$CustomEndpointUri,
+
+		[Parameter()]
+		[ValidateNotNullOrEmpty()]
+		[string]$SSML,
 		
 		[Parameter(Mandatory)]
 		[ValidateNotNullOrEmpty()]
@@ -32,32 +40,27 @@ function ConvertTo-Speech {
 		[switch]$PassThru
 	)
 
-	$genderMap = @{
-		'ZiraRUS'     = 'Female'
-		'JessaRUS'    = 'Female'
-		'Jessa24kRUS' = 'Female'
-		'BenjaminRUS' = 'Male'
-		'Guy24kRUS'   = 'Male'
-		'GuyNeural'   = 'Male'
-		'JessaNeural' = 'Female'
-	}
-
-	$gender = $genderMap[$VoiceAgent]
-
 	$ErrorActionPreference = 'Stop'
 
-	$ssml = @'
-<speak version='1.0' xml:lang='en-US'><voice xml:lang='en-US' xml:gender='{0}'
-name='Microsoft Server Speech Text to Speech Voice (en-US, {1})'>
-{2}
-</voice></speak>
-'@ -f $gender, $VoiceAgent, $Text
+	if (-not $PSBoundParameters.ContainsKey('SSML')) {
+		[xml]$xSsml = "<speak version='1.0' xml:lang='en-US'><voice xml:lang='en-US'></voice></speak>"
+		
+		$xSsml.speak.voice.InnerText = $Text
+		if ($PSCmdlet.ParameterSetName -eq 'StandardVoice') {
+			$attrib = $xSsml.speak.SelectSingleNode('voice').OwnerDocument.CreateAttribute('name')
+			$attrib.Value = "Microsoft Server Speech Text to Speech Voice (en-US, $VoiceAgent)"
+			$null = $xSsml.speak.SelectSingleNode('voice').Attributes.Append($attrib)
+		}
+		$SSML = $xSsml.InnerXml
+	}
 	
-
 	$params = @{
 		'Headers'    = @{'X-Microsoft-OutputFormat' = $AudioOutput }
-		'Body'       = $ssml
+		'Body'       = $SSML
 		'OutputFile' = $OutputFile
+	}
+	if ($PSBoundParameters.ContainsKey('CustomEndpointUri')) {
+		$params.Uri = $CustomEndpointUri
 	}
 	$file = InvokeConvertCsTsApi @params
 
