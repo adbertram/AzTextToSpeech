@@ -1,5 +1,9 @@
 {
     "TokenEndpoint": "https://eastus.api.cognitive.microsoft.com/sts/v1.0/issuetoken",
+    "CustomEndpoints": [{
+        "Name": "AdamV2",
+        "Uri": "https://eastus.voice.speech.microsoft.com/cognitiveservices/v1?deploymentId=275f3dba-cb02-48ef-a408-22ac1b80b05a"
+    }],
     "SubscriptionRegion": "eastus",
     "CognitiveServicesAccount": {
         "Name": "TestAccount",

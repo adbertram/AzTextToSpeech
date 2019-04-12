@@ -23,11 +23,12 @@ function ConvertTo-Speech {
 		[ValidateSet('ZiraRUS', 'JessaRUS', 'BenjaminRUS', 'Jessa24kRUS', 'Guy24kRUS', 'GuyNeural', 'JessaNeural')]
 		[string]$VoiceAgent,
 
-		[Parameter(Mandatory, ParameterSetName = 'CustomVoice')]
+		[Parameter(Mandatory, ValueFromPipelineByPropertyName, ParameterSetName = 'CustomVoice')]
 		[ValidateNotNullOrEmpty()]
+		[Alias('Uri')]
 		[string]$CustomEndpointUri,
 
-		[Parameter()]
+		[Parameter(Mandatory, ParameterSetName = 'SSML')]
 		[ValidateNotNullOrEmpty()]
 		[string]$SSML,
 		
