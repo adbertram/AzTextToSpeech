@@ -6,7 +6,7 @@ This module will help you collect up your training data, build transcritpts, org
 
 ## Requirements
 
-1. An Azure Cognitive Services account
+1. An Azure Cognitive Services account. [Link with instructions](https://docs.microsoft.com/en-us/azure/cognitive-services/cognitive-services-apis-create-account)
 2. Authenticated to Azure in your PowerShell session (Connect-AzAccount)
 
 ## Getting Started
