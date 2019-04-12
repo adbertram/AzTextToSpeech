@@ -1,4 +1,4 @@
-function New-RecordingPackage {
+function New-TrainingDataPackage {
 	[OutputType('')]
 	[CmdletBinding()]
 	param
