@@ -37,3 +37,9 @@ All configuration you need to do ahead and time is located in the configuration.
 ### Grabbing your first token
 
 You'll need a token to authenticate to Azure and AzSpeecToText has made it easy. Simply run `Connect-AzSpeechToText` after the module is imported. This will use values in your configuration.json file and issue a token saving in the module scope to be reused. Tokens are only good for 10 minutes but the module has retry capabilities built in if it fails due to a token expiration issue. If so, it will automatically get another token for you.
+
+## Building Training Data
+
+The text-to-speech API requireas data to be in a specific format. You need WAV files in a specific order with a specifically formatted transcript no larger than 200MB which AzSpeechToText calls a training data package.
+
+##TODO
