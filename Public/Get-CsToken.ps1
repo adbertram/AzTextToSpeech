@@ -2,15 +2,19 @@ function Get-CsToken {
 	[OutputType('pscustomobject')]
 	[CmdletBinding()]
 	param
-	()
+	(
+		[Parameter()]
+		[ValidateNotNullOrEmpty()]
+		[string]$Key = $script:config.Key
+	)
 
 	$ErrorActionPreference = 'Stop'
 
 	$headers = @{
-		'Ocp-Apim-Subscription-Key' = $script:config.Key
-		'Content-Length'            = '0'
+		'Content-Length' = '0'
+		'Key'            = $Key
 	}
-
+	
 	$params = @{
 		'Uri'         = $script:config.TokenEndpoint
 		'ContentType' = 'application/x-www-form-urlencoded'

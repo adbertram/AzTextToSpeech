@@ -63,7 +63,7 @@ function InvokeApi {
 	} catch {
 		if ($_.Exception.Message -eq 'The remote server returned an error: (401) Unauthorized.') {
 			RefreshCsToken
-			InvokeApi -Uri $Uri -Method $Method -Headers $Headers
+			$script:config.token
 		} else {
 			$PSCmdlet.ThrowTerminatingError($_)
 		}
