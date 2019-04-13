@@ -2,13 +2,9 @@ function Get-VoiceAgent {
 	[OutputType('pscustomobject')]
 	[CmdletBinding()]
 	param
-	(
-		[Parameter()]
-		[ValidateNotNullOrEmpty()]
-		[uri]$Uri
-	)
+	()
 
 	$ErrorActionPreference = 'Stop'
 
-	InvokeGetCsTsApi -Endpoint 'voices\list'
+	InvokeApi -Uri 'https://eastus.tts.speech.microsoft.com/cognitiveservices/voices/list' -Method 'GET'
 }

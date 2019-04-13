@@ -6,21 +6,13 @@ function Get-CsToken {
 
 	$ErrorActionPreference = 'Stop'
 
-	$config = GetConfiguration
-
-	$params = @{
-		ResourceGroupName = $config.CognitiveServicesAccount.ResourceGroupName
-		Name              = $config.CognitiveServicesAccount.Name
-	}
-	$keys = Get-AzCognitiveServicesAccountKey @params
-
 	$headers = @{
-		'Ocp-Apim-Subscription-Key' = $keys.Key1
+		'Ocp-Apim-Subscription-Key' = $script:config.Key
 		'Content-Length'            = '0'
 	}
 
 	$params = @{
-		'Uri'         = $config.TokenEndpoint
+		'Uri'         = $script:config.TokenEndpoint
 		'ContentType' = 'application/x-www-form-urlencoded'
 		'Headers'     = $headers
 		'Method'      = 'POST'

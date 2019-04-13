@@ -13,6 +13,14 @@ function InvokeApi {
 
 		[Parameter()]
 		[ValidateNotNullOrEmpty()]
+		[string]$OutFile,
+
+		[Parameter()]
+		[ValidateNotNullOrEmpty()]
+		[string]$Body,
+
+		[Parameter()]
+		[ValidateNotNullOrEmpty()]
 		[string]$ContentType,
 
 		[Parameter()]
@@ -24,11 +32,15 @@ function InvokeApi {
 
 	$config = GetConfiguration
 
+	if (-not (Get-Variable -Name 'config' -Scope 'Script' -ErrorAction Ignore)) {
+		throw "Configuration not found. Have you ran Connect-AzSpeechToText yet?"
+	}
+
 	if ($PSBoundParameters.ContainsKey('Headers')) {
-		$Headers.Authorization = "Bearer $($config.Token)"
+		$Headers.Authorization = "Bearer $($script:config.Token)"
 	} else {
 		$Headers = @{
-			'Authorization' = "Bearer $($token)"
+			'Authorization' = "Bearer $($script:config.Token)"
 		}
 	}
 
@@ -38,8 +50,14 @@ function InvokeApi {
 			Method  = $Method
 			Uri     = $Uri
 		}
+		if ($PSBoundParameters.ContainsKey('Body')) {
+			$params.Body = $Body
+		}
 		if ($PSBoundParameters.ContainsKey('ContentType')) {
 			$params.ContentType = $ContentType
+		}
+		if ($PSBoundParameters.ContainsKey('OutFile')) {
+			$params.OutFile = $OutFile
 		}
 		Invoke-RestMethod @params
 	} catch {

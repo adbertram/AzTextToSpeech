@@ -56,16 +56,19 @@ function ConvertTo-Speech {
 	}
 	
 	$params = @{
-		'Headers'    = @{'X-Microsoft-OutputFormat' = $AudioOutput }
-		'Body'       = $SSML
-		'OutputFile' = $OutputFile
+		'Headers'     = @{'X-Microsoft-OutputFormat' = $AudioOutput }
+		'Body'        = $SSML
+		'Method'      = 'POST'
+		'ContentType' = 'application/ssml+xml'
+		'OutFile'     = $OutputFile
+		'Uri'         = "https://$($script:config.SubscriptionRegion).tts.speech.microsoft.com/cognitiveservices/v1"
 	}
 	if ($PSBoundParameters.ContainsKey('CustomEndpointUri')) {
 		$params.Uri = $CustomEndpointUri
 	}
-	$file = InvokeConvertCsTsApi @params
+	InvokeApi @params
 
 	if ($PassThru.IsPresent) {
-		$file
+		Get-Item -Path $OutputFile
 	}
 }
