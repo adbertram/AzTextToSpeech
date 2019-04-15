@@ -21,6 +21,7 @@ try {
 	$publishParams = @{
 		Path        = $env:APPVEYOR_BUILD_FOLDER
 		NuGetApiKey = $env:nuget_apikey
+		Version     = $env:APPVEYOR_BUILD_VERSION
 	}
 	Publish-PMModule @publishParams
 
