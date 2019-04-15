@@ -5,7 +5,11 @@ function Get-CsToken {
 	(
 		[Parameter()]
 		[ValidateNotNullOrEmpty()]
-		[string]$Key = $script:config.Key
+		[string]$Key = $script:config.Key,
+
+		[Parameter()]
+		[ValidateNotNullOrEmpty()]
+		[string]$Uri = $script:config.TokenEndpoint
 	)
 
 	$ErrorActionPreference = 'Stop'
@@ -16,7 +20,7 @@ function Get-CsToken {
 	}
 	
 	$params = @{
-		'Uri'         = $script:config.TokenEndpoint
+		'Uri'         = $Uri
 		'ContentType' = 'application/x-www-form-urlencoded'
 		'Headers'     = $headers
 		'Method'      = 'POST'
