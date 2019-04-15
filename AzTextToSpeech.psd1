@@ -1,5 +1,5 @@
 @{
-	RootModule        = 'AzSpeechToText.psm1'
+	RootModule        = 'AzTextToSpeech.psm1'
 	ModuleVersion     = '*'
 	GUID              = 'b375c986-205d-4759-a4cb-3180dc073a64'
 	Author            = 'Adam Bertram'
@@ -13,7 +13,7 @@
 	PrivateData       = @{
 		PSData = @{
 			Tags       = @('AzureCognitiveServices', 'Blogs')
-			ProjectUri = 'https://github.com/adbertram/AzSpeechToText'
+			ProjectUri = 'https://github.com/adbertram/AzTextToSpeech'
 		}
 	}
 }
