@@ -17,7 +17,7 @@ try {
 		$manifestContent = $manifestContent -replace $_.Key, $_.Value
 	}
 
-	Get-Variable -Name 'env'
+	Get-ChildItem -Path Env:* | Sort-Object Name
 	$manifestContent | Set-Content -Path $manifestFilePath
 
 } catch {
