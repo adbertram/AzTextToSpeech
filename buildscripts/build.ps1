@@ -17,7 +17,7 @@ try {
 		$manifestContent = $manifestContent -replace $_.Key, $_.Value
 	}
 
-	Get-ChildItem -Path Env:* | Sort-Object Name
+	$env:APPVEYOR_BUILD_VERSION
 	$manifestContent | Set-Content -Path $manifestFilePath
 
 } catch {
