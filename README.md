@@ -1,5 +1,7 @@
 # AzTextToSpeech
 
+[![Build status](https://ci.appveyor.com/api/projects/status/xccbsyl4ihl9gubf?svg=true)](https://ci.appveyor.com/project/adbertram/aztexttospeech)
+
 AzTextToSpeech is a PowerShell module created to work with the Azure Cognitive Services (Speech Services) Text-to-Speech API. It was built to help users more easily manage and test their text-to-speech ecosystem.
 
 This module will help you collect up your training data using `New-TrainingDataPackage`, build transcritpts with `New-Transcript`, organize your custom endpoints and provide a way to quickly test your models using the `ConvertTo-Speech` function.
