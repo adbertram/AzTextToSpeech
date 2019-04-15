@@ -9,7 +9,7 @@ try {
 	$publicFunctions = Get-ChildItem -Path "$env:APPVEYOR_BUILD_FOLDER\Public" | Select-Object -ExpandProperty BaseName
 	$functionsToExport = ($publicFunctions | foreach { "'$_'" }) -join ','
 	$replacements = @{
-		"ModuleVersion = ''"       = "ModuleVersion = '$env:APPVEYOR_BUILD_VERSION'"
+		"ModuleVersion = '\*'"     = "ModuleVersion = '$env:APPVEYOR_BUILD_VERSION'"
 		"FunctionsToExport = '\*'" = "FunctionsToExport = $functionsToExport"
 	}		
 
@@ -17,7 +17,6 @@ try {
 		$manifestContent = $manifestContent -replace $_.Key, $_.Value
 	}
 
-	Write-Host $manifestContent
 	$manifestContent | Set-Content -Path $manifestFilePath
 
 } catch {

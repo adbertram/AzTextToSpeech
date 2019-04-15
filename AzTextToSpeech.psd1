@@ -1,6 +1,6 @@
 @{
 	RootModule        = 'AzSpeechToText.psm1'
-	ModuleVersion     = ''
+	ModuleVersion     = '*'
 	GUID              = 'b375c986-205d-4759-a4cb-3180dc073a64'
 	Author            = 'Adam Bertram'
 	CompanyName       = 'Adam the Automator, LLC'
