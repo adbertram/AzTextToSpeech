@@ -1,4 +1,4 @@
-function Connect-AzSpeechToText {
+function Connect-AzTextToSpeech {
 	[OutputType('pscustomobject')]
 	[CmdletBinding()]
 	param
