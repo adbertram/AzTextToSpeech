@@ -17,7 +17,7 @@ try {
 		$manifestContent = $manifestContent -replace $_.Key, $_.Value
 	}
 
-	Write-Host (ls env:)
+	Write-Host $env:APPVEYOR_BUILD_FOLDER
 	$manifestContent | Set-Content -Path $manifestFilePath
 
 } catch {
