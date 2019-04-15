@@ -17,6 +17,7 @@ try {
 		$manifestContent = $manifestContent -replace $_.Key, $_.Value
 	}
 
+	Write-Host $env
 	$manifestContent | Set-Content -Path $manifestFilePath
 
 } catch {
