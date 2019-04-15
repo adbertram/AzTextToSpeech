@@ -8,6 +8,7 @@ This module will help you collect up your training data using `New-TrainingDataP
 
 1. An Azure Cognitive Services account. [Link with instructions](https://docs.microsoft.com/en-us/azure/cognitive-services/cognitive-services-apis-create-account)
 2. Authenticated to Azure in your PowerShell session (Connect-AzAccount)
+3. The Az.CognitiveServices PowerShell module
 
 ## Getting Started
 
@@ -18,6 +19,8 @@ All configuration you need to do ahead and time is located in the configuration.
  - Token endpoint. The token endpoint will be the same as what comes default but you will simply need to replace the region. https://<REGIONHERE>.api.cognitive.microsoft.com/sts/v1.0/issuetoken. This is the same region as your Azure subscription.
  - The subscription region
  - Your Cogntive Services account name and resource group
+ 
+ You can find the token endpoint, subscription region and account information by running `Get-AzCognitiveServicesAccount | Select-Object -Property Endpoint,AccountName,ResourceGroupName,Location`.
   
 ```JSON
 {
