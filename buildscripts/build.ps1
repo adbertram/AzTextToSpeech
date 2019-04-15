@@ -14,10 +14,10 @@ try {
 	}		
 
 	$replacements.GetEnumerator() | foreach {
+		Write-Host "Replacing [$($_.Key)] with [$($_.Value)]..."
 		$manifestContent = $manifestContent -replace $_.Key, $_.Value
 	}
 
-	$env:APPVEYOR_BUILD_VERSION
 	$manifestContent | Set-Content -Path $manifestFilePath
 
 } catch {
