@@ -1,9 +1,56 @@
 function ConvertTo-Speech {
-	[OutputType('void')]
+	<#
+		.SYNOPSIS
+			Converts text to speech by calling an Azure Speech Services text to speech API and returning the result.
+
+		.PARAMETER Text
+			A mandatory (when not using the SSML parameter) string representing the text to convert to speech. If the SSML
+			parameter is used, the text to convert will be held in there.
+
+		.PARAMETER AudioOutput
+			A mandatory string representing the audio format the output file will be in once returned. Use the tab key to auto-complete
+			available options.
+
+		.PARAMETER VoiceAgent
+			A mandatory (when using the VoiceAgent parameter) string representing the Cognitive Services voice agent 
+			to use to dicate the text. Use the tab key to auto-complete available options. This parameter cannot be used 
+			with CustomEndpointUri or SSML.
+
+		.PARAMETER CustomEndpointUri
+			A mandatory (when not using the VoiceAgent parameter) uri representing a custom endpoint created after 
+			creating a custom voice font.
+		
+		.PARAMETER SSML
+			A mandatory (when not using the VoiceAgent or CustomEndpointUri parameters) string parameter representing 
+			SSML to pass to the API. By default, this SSML is created for you automatically and passed to the API. 
+			Use this option to craft custom SSML.
+
+		.PARAMETER OutputFile
+			A mandatory string parameter representing the path to save the audio file that is returned.
+
+		.PARAMETER PassThru
+			A switch parameter to use if you'd like the output file returned as a System.IO.FileInfo object. By default,
+			the file is just saved. Use this to return the file.
+	
+		.EXAMPLE
+			PS> ConvertTo-Speech -Text 'Hello, how are you?' -AudioOutput 'audio-16khz-64kbitrate-mono-mp3' -VoiceAgent 'ZiraUS' -OutputFile 'C:\test.mp3'
+
+			This example will instruct the ZiraUS voice to dicate 'Hello, how are you?' returning a audio-16khz-64kbitrate-mono-mp3
+			audio file and saving it as C:\test.mp3.
+
+		.EXAMPLE
+			PS> ConvertTo-Speech -Text 'Hello, how are you?' -AudioOutput 'audio-16khz-64kbitrate-mono-mp3' -VoiceAgent 'ZiraUS' -OutputFile 'C:\test.mp3'
+
+			This example will instruct the ZiraUS voice to dicate 'Hello, how are you?' returning a audio-16khz-64kbitrate-mono-mp3
+			audio file and saving it as C:\test.mp3.
+	
+	#>
+	[OutputType('System.IO.FileInfo')]
 	[CmdletBinding(DefaultParameterSetName = 'StandardVoice')]
 	param
 	(
-		[Parameter(Mandatory)]
+		[Parameter(Mandatory, ParameterSetName = 'StandardVoice')]
+		[Parameter(Mandatory, ParameterSetName = 'CustomVoice')]
 		[ValidateNotNullOrEmpty()]
 		[string]$Text,
 
@@ -26,7 +73,7 @@ function ConvertTo-Speech {
 		[Parameter(Mandatory, ValueFromPipelineByPropertyName, ParameterSetName = 'CustomVoice')]
 		[ValidateNotNullOrEmpty()]
 		[Alias('Uri')]
-		[string]$CustomEndpointUri,
+		[uri]$CustomEndpointUri,
 
 		[Parameter(Mandatory, ParameterSetName = 'SSML')]
 		[ValidateNotNullOrEmpty()]
