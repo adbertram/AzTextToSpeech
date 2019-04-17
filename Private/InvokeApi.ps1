@@ -33,7 +33,7 @@ function InvokeApi {
 	$config = GetConfiguration
 
 	if (-not (Get-Variable -Name 'config' -Scope 'Script' -ErrorAction Ignore)) {
-		throw "Configuration not found. Have you ran Connect-AzSpeechToText yet?"
+		throw "Configuration not found. Have you ran Connect-AzTextToSpeech yet?"
 	}
 
 	if ($PSBoundParameters.ContainsKey('Headers')) {
