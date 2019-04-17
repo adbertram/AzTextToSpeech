@@ -59,6 +59,8 @@ function InvokeApi {
 		if ($PSBoundParameters.ContainsKey('OutFile')) {
 			$params.OutFile = $OutFile
 		}
+		$progBefore = $ProgressPreference
+		$ProgressPreference = 'SilentlyContinue'
 		Invoke-RestMethod @params
 	} catch {
 		if ($_.Exception.Message -eq 'The remote server returned an error: (401) Unauthorized.') {
@@ -67,5 +69,7 @@ function InvokeApi {
 		} else {
 			$PSCmdlet.ThrowTerminatingError($_)
 		}
+	} finally {
+		$ProgressPreference = $progBefore
 	}
 }
