@@ -4,7 +4,7 @@
 
 AzTextToSpeech is a PowerShell module created to work with the Azure Cognitive Services (Speech Services) Text-to-Speech API. It was built to help users more easily manage and test their text-to-speech ecosystem.
 
-This module will help you collect up your training data using `New-TrainingDataPackage`, build transcripts with `New-Transcript`, quickly retrieveorganize your custom endpoints and provide a way to quickly test your models using the `ConvertTo-Speech` function.
+This module will help you collect up your training data using `New-TrainingDataPackage`, build transcripts with `New-Transcript`, quickly retrieve your custom endpoints and provide a way to quickly test SSML using the `ConvertTo-Speech` function.
 
 ## Requirements
 
