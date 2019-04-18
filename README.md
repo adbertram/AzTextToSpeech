@@ -18,7 +18,7 @@ This module will help you collect up your training data using `New-TrainingDataP
 
 All configuration you need to do ahead and time is located in the configuration.json file. You will need to set:
 
- - Token endpoint. The token endpoint will be the same as what comes default but you will simply need to replace the region. https://<REGIONHERE>.api.cognitive.microsoft.com/sts/v1.0/issuetoken. This is the same region as your Azure subscription.
+ - Token endpoint. The token endpoint will be the same as what comes default but you will simply need to replace the region. https://REGIONHERE.api.cognitive.microsoft.com/sts/v1.0/issuetoken. This is the same region as your Azure subscription.
  - The subscription region
  - Your Cogntive Services account name and resource group
  
