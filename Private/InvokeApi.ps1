@@ -64,8 +64,8 @@ function InvokeApi {
 		Invoke-RestMethod @params
 	} catch {
 		if ($_.Exception.Message -eq 'The remote server returned an error: (401) Unauthorized.') {
+			Write-Warning -Message 'API call not authorized. Attempting to refresh token...'
 			RefreshCsToken
-			$script:config.token
 		} else {
 			$PSCmdlet.ThrowTerminatingError($_)
 		}

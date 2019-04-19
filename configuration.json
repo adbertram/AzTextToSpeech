@@ -1,5 +1,6 @@
 {
     "TokenEndpoint": "https://<AzureSubscriptionRegionHere>.api.cognitive.microsoft.com/sts/v1.0/issuetoken",
+    "APIKey": "",
     "CustomEndpoints": [{
         "Name": "",
         "Uri": ""

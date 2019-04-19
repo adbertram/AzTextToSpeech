@@ -6,5 +6,5 @@ function Get-VoiceAgent {
 
 	$ErrorActionPreference = 'Stop'
 
-	InvokeApi -Uri 'https://eastus.tts.speech.microsoft.com/cognitiveservices/voices/list' -Method 'GET'
+	InvokeApi -Uri "https://$($script:config.SubscriptionRegion).tts.speech.microsoft.com/cognitiveservices/voices/list" -Method 'GET'
 }

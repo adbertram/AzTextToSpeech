@@ -7,7 +7,7 @@ function RefreshCsToken {
 	$ErrorActionPreference = 'Stop'
 
 	$headers = @{
-		'Ocp-Apim-Subscription-Key' = $script:config.Key
+		'Ocp-Apim-Subscription-Key' = $script:config.APIKey
 		'Content-Length'            = '0'
 	}
 
