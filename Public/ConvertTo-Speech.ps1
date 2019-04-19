@@ -113,7 +113,7 @@ function ConvertTo-Speech {
 	if ($PSBoundParameters.ContainsKey('CustomEndpointUri')) {
 		$params.Uri = $CustomEndpointUri
 	}
-	InvokeApi @params
+	$null = InvokeApi @params
 
 	if ($PassThru.IsPresent) {
 		Get-Item -Path $OutputFile
