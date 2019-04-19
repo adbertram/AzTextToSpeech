@@ -1,5 +1,5 @@
 function New-Transcript {
-	[OutputType('')]
+	[OutputType('System.IO.FileInfo')]
 	[CmdletBinding()]
 	param
 	(
@@ -17,7 +17,11 @@ function New-Transcript {
 
 		[Parameter()]
 		[ValidateNotNullOrEmpty()]
-		[switch]$Force
+		[switch]$Force,
+
+		[Parameter()]
+		[ValidateNotNullOrEmpty()]
+		[switch]$PassThru
 	)
 
 	$ErrorActionPreference = 'Stop'
@@ -50,4 +54,8 @@ function New-Transcript {
 		throw "Existing transcript found and Force was not used to overwrite."
 	}
 	$transcriptText.Trim() | Set-Content -Path $TranscriptFilePath -NoNewline
+
+	if ($PassThru.IsPresent) {
+		Get-Item -Path $TranscriptFilePath
+	}
 }
