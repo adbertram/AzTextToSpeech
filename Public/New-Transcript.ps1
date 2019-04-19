@@ -49,5 +49,5 @@ function New-Transcript {
 	if ((Test-Path -Path $TranscriptFilePath -PathType Leaf) -and (-not $Force.IsPresent)) {
 		throw "Existing transcript found and Force was not used to overwrite."
 	}
-	$transcriptText | Set-Content -Path $TranscriptFilePath
+	$transcriptText.Trim() | Set-Content -Path $TranscriptFilePath -NoNewline
 }
