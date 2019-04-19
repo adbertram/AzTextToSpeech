@@ -5,7 +5,7 @@ function New-TrainingDataPackage {
 	(
 		[Parameter(Mandatory)]
 		[ValidateNotNullOrEmpty()]
-		[string]$RecordingFileFolder,
+		[string]$RecordingFileFolderPath,
 
 		[Parameter(Mandatory)]
 		[ValidateNotNullOrEmpty()]
@@ -24,7 +24,7 @@ function New-TrainingDataPackage {
 
 	$audioFileNames = (Get-Content -Path $TranscriptFilePath).foreach({ $_.split("`t")[0] }) | Get-Unique
 
-	$recordings = Get-ChildItem -Path $RecordingFileFolder
+	$recordings = Get-ChildItem -Path $RecordingFileFolderPath
 	$recordings.foreach({
 			if ($_.BaseName -notin $audioFileNames) {
 				throw "The recording [$($_.Name)] is not in the transcript."
