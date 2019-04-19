@@ -4,7 +4,7 @@
 
 AzTextToSpeech is a PowerShell module created to work with the Azure Cognitive Services (Speech Services) Text-to-Speech API. It was built to help users more easily manage and test their text-to-speech ecosystem.
 
-This module will help you collect up your training data using `New-TrainingDataPackage`, build transcripts with `New-Transcript`, quickly retrieveorganize your custom endpoints and provide a way to quickly test your models using the `ConvertTo-Speech` function.
+This module will help you collect up your training data using `New-TrainingDataPackage`, build transcripts with `New-Transcript`, quickly retrieve your custom endpoints and provide a way to quickly test SSML using the `ConvertTo-Speech` function.
 
 ## Requirements
 
@@ -18,7 +18,7 @@ This module will help you collect up your training data using `New-TrainingDataP
 
 All configuration you need to do ahead and time is located in the configuration.json file. You will need to set:
 
- - Token endpoint. The token endpoint will be the same as what comes default but you will simply need to replace the region. https://<REGIONHERE>.api.cognitive.microsoft.com/sts/v1.0/issuetoken. This is the same region as your Azure subscription.
+ - Token endpoint. The token endpoint will be the same as what comes default but you will simply need to replace the region. https://REGIONHERE.api.cognitive.microsoft.com/sts/v1.0/issuetoken. This is the same region as your Azure subscription.
  - The subscription region
  - Your Cogntive Services account name and resource group
  
