@@ -18,7 +18,7 @@ function EscapeXml {
 		'>' = 'gt'
 	}
 	foreach ($repl in $replacements.GetEnumerator()) {
-		$Xml = $Xml -replace $repl.Key, "&$($repl.Value)"
+		$Xml = $Xml -replace $repl.Key, "&$($repl.Value);"
 	}
 	$Xml
 }
