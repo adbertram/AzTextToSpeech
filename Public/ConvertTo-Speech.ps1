@@ -93,7 +93,7 @@ function ConvertTo-Speech {
 	if (-not $PSBoundParameters.ContainsKey('SSML')) {
 		[xml]$xSsml = "<speak version='1.0' xml:lang='en-US'><voice xml:lang='en-US'></voice></speak>"
 		
-		$xSsml.speak.voice.InnerText = $Text
+		$xSsml.speak.voice.InnerText = EscapeXml -Xml $Text
 		if ($PSCmdlet.ParameterSetName -eq 'StandardVoice') {
 			$attrib = $xSsml.speak.SelectSingleNode('voice').OwnerDocument.CreateAttribute('name')
 			$attrib.Value = "Microsoft Server Speech Text to Speech Voice (en-US, $VoiceAgent)"
