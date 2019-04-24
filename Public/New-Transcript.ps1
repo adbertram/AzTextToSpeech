@@ -40,7 +40,7 @@ function New-Transcript {
 	$rawTranscriptLines = Get-Content -Path $RawTranscriptFilePath
 	## Ensure there are an equal number of sentences in the raw text file that there are recordings
 	if (@($rawTranscriptLines).Count -ne @($recordings).Count) {
-		throw 'One recording file must exist for every sentence in the raw transcript file.'
+		throw "One recording file must exist for every sentence in the raw transcript file. You currently have [$(@($rawTranscriptLines).Count)] lines in your transcript and [$(@($recordings).Count)] recording files."
 	}
 
 	## Build the transcript
